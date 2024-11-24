@@ -11,11 +11,14 @@ const envValidation = Joi.object()
       .required(),
     PORT: Joi.number().default(3000),
     BASE_URL: Joi.string().required(),
+<<<<<<< HEAD
     DB_HOST: Joi.string().default("localhost"),
     DB_PORT: Joi.string().default("5432"),
     DB_USER: Joi.string().required(),
     DB_PASS: Joi.string().required(),
     DB_NAME: Joi.string().required(),
+=======
+>>>>>>> staging
     JWT_SECRET: Joi.string().required().description("JWT secret key"),
     JWT_ACCESS_EXPIRATION_MINUTES: Joi.number()
       .default(30)
@@ -54,11 +57,14 @@ const config = {
   appIdentifier: envVar.APP_IDENTIFIER,
   port: envVar.PORT,
   baseUrl: envVar.BASE_URL,
+<<<<<<< HEAD
   dbHost: envVar.DB_HOST,
   dbPort: envVar.DB_PORT,
   dbUser: envVar.DB_USER,
   dbPass: envVar.DB_PASS,
   dbName: envVar.DB_NAME,
+=======
+>>>>>>> staging
   jwt: {
     secret: envVar.JWT_SECRET,
     accessExpirationMinutes: envVar.JWT_ACCESS_EXPIRATION_MINUTES,

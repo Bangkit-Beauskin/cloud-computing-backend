@@ -13,7 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const AuthService_1 = __importDefault(require("../services/AuthService"));
+<<<<<<< HEAD
 const http_status_1 = __importDefault(require("http-status")); // Make sure http-status is installed
+=======
+const http_status_1 = __importDefault(require("http-status"));
+>>>>>>> staging
 class AuthController {
     constructor() {
         this.login = (req, res) => __awaiter(this, void 0, void 0, function* () {
@@ -29,6 +33,10 @@ class AuthController {
         });
         this.register = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
+<<<<<<< HEAD
+=======
+                console.log(req.body);
+>>>>>>> staging
                 const auth = yield this.authService.register(req.body);
                 const { message, data } = auth.response;
                 const code = auth.statusCode;
@@ -40,7 +48,11 @@ class AuthController {
         });
         this.verifyOTP = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
+<<<<<<< HEAD
                 const auth = yield this.authService.validateOTP(req.body);
+=======
+                const auth = yield this.authService.validateOTP(req.body, req.userInfo.id);
+>>>>>>> staging
                 const { message, data } = auth.response;
                 const code = auth.statusCode;
                 return res.status(code).send({ code, message, data });

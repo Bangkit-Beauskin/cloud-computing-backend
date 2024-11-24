@@ -9,5 +9,9 @@ const Redis = require("ioredis");
 exports.redisClient = new Redis({
     host: _1.default.redis.host,
     port: _1.default.redis.port,
+<<<<<<< HEAD
+=======
+    password: _1.default.redis.password,
+>>>>>>> staging
 });
 //# sourceMappingURL=RedisConfig.js.map

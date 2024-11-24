@@ -20,8 +20,14 @@ export default class TokenService {
     );
 
     redisClient.setex(
+<<<<<<< HEAD
       "tokens:" + token,
       config.jwt.accessExpirationMinutes * 60 * 1000,
+=======
+      "tokens:" + id,
+      config.jwt.accessExpirationMinutes * 60 * 1000,
+      token,
+>>>>>>> staging
     );
     return token;
   }
@@ -41,8 +47,14 @@ export default class TokenService {
     );
 
     redisClient.setex(
+<<<<<<< HEAD
       "tokens:" + token,
       config.jwt.refreshExpirationDays * 24 * 60 * 60 * 1000,
+=======
+      "token-refresh:" + id,
+      config.jwt.refreshExpirationDays * 24 * 60 * 60 * 1000,
+      token,
+>>>>>>> staging
     );
     return token;
   }
