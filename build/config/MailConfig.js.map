@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-{"version":3,"file":"MailConfig.js","sourceRoot":"","sources":["../../src/config/MailConfig.ts"],"names":[],"mappings":";;;;;AAAA,4DAAoC;AACpC,yCAAuB;AAEvB,MAAM,WAAW,GAAG,oBAAU,CAAC,eAAe,CAAC;IAC7C,OAAO,EAAE,OAAO;IAChB,IAAI,EAAE;QACJ,IAAI,EAAE,UAAM,CAAC,IAAI,CAAC,QAAQ;QAC1B,QAAQ,EAAE,UAAM,CAAC,IAAI,CAAC,QAAQ;KAC/B;CACF,CAAC,CAAC;AAEH,kBAAe,WAAW,CAAC"}
-=======
-{"version":3,"file":"MailConfig.js","sourceRoot":"","sources":["../../src/config/MailConfig.ts"],"names":[],"mappings":";;;;;AAAA,4DAAoC;AACpC,yCAAuB;AAEvB,MAAM,WAAW,GAAG,oBAAU,CAAC,eAAe,CAAC;IAC7C,IAAI,EAAE,gBAAgB;IACtB,IAAI,EAAE,KAAK;IACX,MAAM,EAAE,KAAK;IACb,IAAI,EAAE;QACJ,IAAI,EAAE,UAAM,CAAC,IAAI,CAAC,QAAQ;QAC1B,IAAI,EAAE,UAAM,CAAC,IAAI,CAAC,QAAQ;KAC3B;CACF,CAAC,CAAC;AAEH,kBAAe,WAAW,CAAC"}
->>>>>>> staging
