@@ -28,12 +28,12 @@ cd cloud-computing-backend
 - click CREATE to create new buckets
 - choose where to store your data to region and choose where you want store data
 
-![alt text](image-1.png)
+![alt text](image-6.png)
 
 - choose how to control access to objects
 - uncheck enforce public access and set access control to fine-grained
 
-![alt text](image.png)
+![alt text](image-5.png)
 
 - click your bucket name in list of bucket
 - click permissions option
@@ -41,10 +41,10 @@ cd cloud-computing-backend
 - in new perincipals choose allUsers
 - in role choose storage object viewer
 
-![alt text](image-2.png)
+![alt text](image-7.png)
 
 - open file main.py change code bucket_name to your bucket name
-  ![alt text](image-4.png)
+  ![alt text](image-9.png)
 
 #### Firestore
 
@@ -71,7 +71,7 @@ cd cloud-computing-backend
 - select type json and create
 - you will downloaded the service account key
 - copy paste the service account key in root project folder
-- open file src/db.ts and change project id with your project id
+- open file `src/db.ts` and change project id with your project id
 
 ![alt text](image-2.png)
 
