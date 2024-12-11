@@ -1,4 +1,4 @@
-./build
+build
 node_modules
 .env
 service_account.json

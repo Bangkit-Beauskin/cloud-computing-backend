@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 
 export default class TokenService {
   generateAccessToken(id) {
+    console.log("user id " + id);
     const iat = Date.now();
     const token = jwt.sign(
       {

@@ -13,10 +13,10 @@ export default class UserService implements IUserService {
   constructor() {
     this.userCollection = db.collection("users");
     const storage = new Storage({
-      projectId: "copycatcapstone",
+      projectId: "Beauskin",
       keyFilename: "service_account.json",
     });
-    this.bucket = storage.bucket("capstone-koong-test-bucket");
+    this.bucket = storage.bucket("beauskin-main-bucket");
     console.log("user service created...");
   }
 
@@ -57,6 +57,7 @@ export default class UserService implements IUserService {
       console.log("url file ", fileUrl);
     }
 
+    console.log("selesai upload");
     await userRef.update({ ...body, profileUrl: fileUrl });
 
     const updatedSnapshot = await userRef.get();

@@ -19,6 +19,9 @@ export default class OTPService {
     try {
       const OTP = this.generateOTP();
       redisClient.setex("users:" + user_id, 60000, OTP);
+      const otp = await redisClient.get("users:" + user_id);
+
+      console.log("otp " + otp + " user id " + user_id);
 
       const mailOptions = {
         from: config.SMTP.username,
@@ -47,7 +50,10 @@ export default class OTPService {
   }
 
   public async verifyOTP(id, inputOTP) {
+    console.log("verify otp " + id + " " + inputOTP);
     const OTP = await redisClient.get("users:" + id);
+
+    console.log("otp " + OTP);
 
     if (inputOTP !== OTP) {
       return false;
