@@ -5,8 +5,5 @@ const Redis = require("ioredis");
 export const redisClient = new Redis({
   host: config.redis.host,
   port: config.redis.port,
-<<<<<<< HEAD
-=======
   password: config.redis.password,
->>>>>>> staging
 });

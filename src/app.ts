@@ -4,11 +4,8 @@ import ApiError from "./utils/ApiError";
 import httpStatus from "http-status";
 import { errorConverter, errorHandler } from "./utils/error";
 import routes from "./routes";
-<<<<<<< HEAD
-=======
 import passport from "passport";
 import { jwtStrategy } from "./config/passport";
->>>>>>> staging
 
 export const app: Express = express();
 
@@ -20,11 +17,8 @@ app.use(
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-<<<<<<< HEAD
-=======
 passport.use("jwt", jwtStrategy);
 app.use(passport.initialize());
->>>>>>> staging
 
 app.use("/api/version", async (req, res) => {
   res.status(200).send("v1.0.0");

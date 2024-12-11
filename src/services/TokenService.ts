@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 
 export default class TokenService {
   generateAccessToken(id) {
+    console.log("user id " + id);
     const iat = Date.now();
     const token = jwt.sign(
       {
@@ -20,14 +21,9 @@ export default class TokenService {
     );
 
     redisClient.setex(
-<<<<<<< HEAD
-      "tokens:" + token,
-      config.jwt.accessExpirationMinutes * 60 * 1000,
-=======
       "tokens:" + id,
       config.jwt.accessExpirationMinutes * 60 * 1000,
       token,
->>>>>>> staging
     );
     return token;
   }
@@ -47,14 +43,9 @@ export default class TokenService {
     );
 
     redisClient.setex(
-<<<<<<< HEAD
-      "tokens:" + token,
-      config.jwt.refreshExpirationDays * 24 * 60 * 60 * 1000,
-=======
       "token-refresh:" + id,
       config.jwt.refreshExpirationDays * 24 * 60 * 60 * 1000,
       token,
->>>>>>> staging
     );
     return token;
   }

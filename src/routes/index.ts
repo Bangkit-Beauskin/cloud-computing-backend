@@ -1,18 +1,11 @@
 import { Router } from "express";
 import Auth from "./AuthRoutes";
-<<<<<<< HEAD
-=======
 import Profile from "./ProfileRoutes";
->>>>>>> staging
+import Product from "./ProductRoutes";
 
 const router = Router();
 const routes = [
   {
-<<<<<<< HEAD
-    path: "/auth",
-    routes: Auth,
-  },
-=======
     path: "/auths",
     routes: Auth,
   },
@@ -20,7 +13,10 @@ const routes = [
     path: "/profiles",
     routes: Profile,
   },
->>>>>>> staging
+  {
+    path: "/products",
+    routes: Product,
+  },
 ];
 
 routes.forEach((route) => {

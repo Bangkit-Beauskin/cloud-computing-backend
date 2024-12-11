@@ -15,17 +15,13 @@ export default class OTPService {
     return otp;
   }
 
-<<<<<<< HEAD
-  public async sendOTP(email) {
-    try {
-      const OTP = this.generateOTP();
-      redisClient.setex("users:" + email, 60000, OTP);
-=======
   public async sendOTP(email, user_id) {
     try {
       const OTP = this.generateOTP();
       redisClient.setex("users:" + user_id, 60000, OTP);
->>>>>>> staging
+      const otp = await redisClient.get("users:" + user_id);
+
+      console.log("otp " + otp + " user id " + user_id);
 
       const mailOptions = {
         from: config.SMTP.username,
@@ -53,23 +49,16 @@ export default class OTPService {
     }
   }
 
-<<<<<<< HEAD
-  public async verifyOTP(email, inputOTP) {
-    const OTP = await redisClient.get("users:" + email);
-=======
   public async verifyOTP(id, inputOTP) {
+    console.log("verify otp " + id + " " + inputOTP);
     const OTP = await redisClient.get("users:" + id);
->>>>>>> staging
+
+    console.log("otp " + OTP);
 
     if (inputOTP !== OTP) {
       return false;
     }
 
-<<<<<<< HEAD
-    await redisClient.del("users:" + email);
-
-=======
->>>>>>> staging
     return true;
   }
 }

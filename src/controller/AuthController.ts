@@ -1,11 +1,7 @@
 import { Request, Response } from "express";
 import AuthService from "../services/AuthService";
-<<<<<<< HEAD
-import httpStatus from "http-status"; // Make sure http-status is installed
-=======
 import httpStatus from "http-status";
 import { redisClient } from "../config/RedisConfig";
->>>>>>> staging
 
 class AuthController {
   private authService: AuthService;
@@ -39,25 +35,17 @@ class AuthController {
     }
   };
 
-<<<<<<< HEAD
-  verifyOTP = async (req: Request, res: Response) => {
-    try {
-      const auth = await this.authService.validateOTP(req.body);
-=======
   verifyOTP = async (req: any, res: Response) => {
     try {
       const auth = await this.authService.validateOTP(
         req.body,
         req.userInfo.id,
       );
->>>>>>> staging
       const { message, data } = auth.response;
       const code = auth.statusCode;
 
       return res.status(code).send({ code, message, data });
     } catch (e) {
-<<<<<<< HEAD
-=======
       console.log(e);
       return res.status(httpStatus.BAD_GATEWAY).send(e);
     }
@@ -73,7 +61,6 @@ class AuthController {
       return res.status(code).send({ code, message, data });
     } catch (e) {
       console.log(e);
->>>>>>> staging
       return res.status(httpStatus.BAD_GATEWAY).send(e);
     }
   };
