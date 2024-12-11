@@ -1,7 +1,7 @@
 import { Firestore } from "@google-cloud/firestore";
 
 const db = new Firestore({
-  projectId: "copycatcapstone",
+  projectId: "beauskin",
   keyFilename: "service_account.json",
 });
 

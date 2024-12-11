@@ -77,7 +77,7 @@ export default class AuthService implements IAuthService {
         );
       }
 
-      const userRef = this.userCollection.add({
+      const userRef = await this.userCollection.add({
         email: body.email,
         password: bcrypt.hashSync(body.password, 10),
         is_verified: false,
@@ -85,6 +85,7 @@ export default class AuthService implements IAuthService {
 
       const accessToken = this.tokenService.generateAccessToken(userRef.id);
 
+      console.log("user id" + userRef.id);
       await this.otpService.sendOTP(body.email, userRef.id);
       return responseHandler.returnSuccess(httpStatus.CREATED, "User created", {
         token: {
@@ -101,9 +102,8 @@ export default class AuthService implements IAuthService {
   }
 
   public async validateOTP(body, user_id) {
-    console.log("Masuk controller ");
     const userDoc = await this.userCollection.doc(user_id).get();
-
+    console.log("Masuk controller user" + userDoc);
     if (userDoc.empty) {
       return responseHandler.returnError(
         httpStatus.BAD_REQUEST,
@@ -111,7 +111,7 @@ export default class AuthService implements IAuthService {
       );
     }
 
-    if (!(await this.otpService.verifyOTP(user_id, body.otp))) {
+    if (!(await this.otpService.verifyOTP(userDoc.id, body.otp))) {
       return responseHandler.returnError(httpStatus.BAD_REQUEST, "Wrong OTP");
     }
 
