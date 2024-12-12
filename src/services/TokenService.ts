@@ -57,7 +57,7 @@ export default class TokenService {
       },
       config.jwt.secret,
       {
-        expiresIn: Number(config.jwt.refreshExpirationDays * 24) * 3600000,
+        expiresIn: Number(config.jwt.refreshExpirationDays * (24 * 3600000)),
       },
     );
 
@@ -66,7 +66,7 @@ export default class TokenService {
       type: "REFRESH",
       token: token,
       expired_at: new Date(
-        Date.now() + Number(config.jwt.accessExpirationMinutes * 24) * 3600000,
+        Date.now() + Number(config.jwt.refreshExpirationDays * (24 * 3600000)),
       ),
     });
 
