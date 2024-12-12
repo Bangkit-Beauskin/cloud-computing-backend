@@ -46,7 +46,7 @@ export default class AuthService implements IAuthService {
       }
 
       this.otpService.sendOTP(body.email, userSnapshot.docs[0].id);
-      const accessToken = this.tokenService.generateAccessToken(
+      const accessToken = await this.tokenService.generateAccessToken(
         userSnapshot.docs[0].id,
       );
 
@@ -83,7 +83,10 @@ export default class AuthService implements IAuthService {
         is_verified: false,
       });
 
-      const accessToken = this.tokenService.generateAccessToken(userRef.id);
+      const accessToken = await this.tokenService.generateAccessToken(
+        userRef.id,
+        5,
+      );
 
       console.log("user id" + userRef.id);
       await this.otpService.sendOTP(body.email, userRef.id);
@@ -123,8 +126,10 @@ export default class AuthService implements IAuthService {
       });
     }
 
-    const accessToken = this.tokenService.generateAccessToken(userRef.id);
-    const refreshToken = this.tokenService.generateRefreshToken(userRef.id);
+    const accessToken = await this.tokenService.generateAccessToken(userRef.id);
+    const refreshToken = await this.tokenService.generateRefreshToken(
+      userRef.id,
+    );
 
     return responseHandler.returnSuccess(httpStatus.OK, "User verified", {
       token: {
@@ -140,8 +145,10 @@ export default class AuthService implements IAuthService {
 
     console.log("user id ", userRef.id);
 
-    const accessToken = this.tokenService.generateAccessToken(userRef.id);
-    const refreshToken = this.tokenService.generateRefreshToken(userRef.id);
+    const accessToken = await this.tokenService.generateAccessToken(userRef.id);
+    const refreshToken = await this.tokenService.generateRefreshToken(
+      userRef.id,
+    );
 
     return responseHandler.returnSuccess(httpStatus.OK, "User verified", {
       token: {

@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import AuthService from "../services/AuthService";
 import httpStatus from "http-status";
-import { redisClient } from "../config/RedisConfig";
 
 class AuthController {
   private authService: AuthService;

@@ -1,7 +1,6 @@
 import { ExtractJwt, Strategy } from "passport-jwt";
 import config from ".";
 import db from "../db";
-import { redisClient } from "./RedisConfig";
 
 const jwtOptions = {
   secretOrKey: config.jwt.secret,
@@ -28,14 +27,38 @@ const jwtVerify = async (req, payload, done) => {
 
     const userCollection = db.collection("users");
     const userSnapshot = await userCollection.doc(payload.sub).get();
-    const tokenExist = redisClient.get("tokens:" + payload.sub);
 
-    console.log("check point 2");
-    if (tokenExist == null) {
+    if (!userSnapshot.exists) {
+      console.log("User not found");
       return done(null, false);
     }
 
-    const user = await userSnapshot.data();
+    const tokenCollection = db.collection("tokens");
+    const db_tokenSnapshot = await tokenCollection.doc(auth[1]).get();
+
+    if (!db_tokenSnapshot.exists) {
+      console.log("Token document not found in Firestore");
+      return done(null, false);
+    }
+
+    const docData = db_tokenSnapshot.data();
+    if (!docData) {
+      console.log("Token document has no data");
+      return done(null, false);
+    }
+
+    const now = new Date();
+    const firestoreTime = docData.expired_at.toDate();
+
+    if (firestoreTime < now) {
+      return done(null, false);
+    }
+
+    const user = userSnapshot.data();
+    if (!user) {
+      console.log("User data not found");
+      return done(null, false); // User not found
+    }
     console.log("check point 3 ", user);
     return done(null, { id: payload.sub, ...user });
   } catch (e) {
