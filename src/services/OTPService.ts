@@ -1,11 +1,14 @@
-import { error } from "console";
-import { redisClient } from "../config/RedisConfig";
-import transporter from "../config/MailConfig";
 import config from "../config";
-import { text } from "stream/consumers";
-import responseHandler from "../utils/responseHandler";
+import transporter from "../config/MailConfig";
+import db from "../db";
 
 export default class OTPService {
+  private otpCollection;
+
+  constructor() {
+    this.otpCollection = db.collection("otp"); // Firestore collection reference
+  }
+
   generateOTP(length = 6) {
     const digits = "0123456789";
     let otp = "";
@@ -18,16 +21,21 @@ export default class OTPService {
   public async sendOTP(email, user_id) {
     try {
       const OTP = this.generateOTP();
-      redisClient.setex("users:" + user_id, 60000, OTP);
-      const otp = await redisClient.get("users:" + user_id);
 
-      console.log("otp " + otp + " user id " + user_id);
+      // Setting data in the Firestore OTP collection
+      await this.otpCollection
+        .doc(user_id + OTP) // Creates a document with a unique ID
+        .set({
+          expired_at: new Date(Date.now() + 60000), // Set expiration time for the OTP
+        });
 
       const mailOptions = {
         from: config.SMTP.username,
         to: email,
         subject: "Beauskin OTP",
-        text: "Your OTP is " + OTP,
+        text:
+          "Hai, \n\nThis is an automated email sent to you to provide the One-Time Password (OTP) code required to access your account. \nYour OTP code is   " +
+          OTP,
       };
 
       console.log(
@@ -51,13 +59,23 @@ export default class OTPService {
 
   public async verifyOTP(id, inputOTP) {
     console.log("verify otp " + id + " " + inputOTP);
-    const OTP = await redisClient.get("users:" + id);
 
-    console.log("otp " + OTP);
+    // Getting data from the Firestore OTP collection
+    const otp = await this.otpCollection
+      .doc(id + inputOTP) // Fetches the document based on the ID and OTP
+      .get();
 
-    if (inputOTP !== OTP) {
+    if (!otp.exists) {
       return false;
     }
+
+    const otpData = otp.data();
+    const now = new Date();
+    if (otpData.expired_at.toDate() < now) {
+      return false;
+    }
+
+    await this.otpCollection.doc(id + inputOTP).delete();
 
     return true;
   }

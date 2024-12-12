@@ -1,9 +1,9 @@
-import config from ".";
+// import config from ".";
 
-const Redis = require("ioredis");
+// const Redis = require("ioredis");
 
-export const redisClient = new Redis({
-  host: config.redis.host,
-  port: config.redis.port,
-  password: config.redis.password,
-});
+// export const redisClient = new Redis({
+//   host: config.redis.host,
+//   port: config.redis.port,
+//   password: config.redis.password,
+// });
