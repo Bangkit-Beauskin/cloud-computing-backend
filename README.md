@@ -2,7 +2,7 @@
 
 BeauSkin is an AI-powered skin analysis service that provides automated assessment of skin conditions, acne detection, and skin type classification using machine learning models.
 
-This repository is contain all api access in the application except api contain model.
+This repository is contain all api access in the beauskin application except contain model API.
 
 ## Setup Instructions
 
